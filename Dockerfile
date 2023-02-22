@@ -10,6 +10,10 @@ VOLUME /app
 COPY . /app
 WORKDIR /app
 
+ENV GITHUB_TOKEN test
+
+
+
 EXPOSE 8082
 
 CMD uvicorn main:app --host 0.0.0.0 --port 8082
