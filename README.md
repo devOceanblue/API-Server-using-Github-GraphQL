@@ -1,2 +1,10 @@
 # Tridge-Coding-Assignments
-트릿지 코딩과제 
+
+## Run
+```shell
+docker-compose up -d
+```
+
+## API Documentation
+http://localhost:8082/docs#
+
