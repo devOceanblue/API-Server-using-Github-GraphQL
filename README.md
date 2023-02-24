@@ -31,7 +31,7 @@ you can test
  python -m pytest tests/test_repository_info.py 
 ```
 
-saved environment variable in dockerfile and application code get the environment variable from config.py 
+environment variable saved in dockerfile and environment variable is configured in config.py 
 
 ### 2. GraphQL usages
   - used GraphQL to fetch data from github graphQL API
