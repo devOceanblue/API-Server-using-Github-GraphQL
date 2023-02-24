@@ -10,7 +10,7 @@ repository_router = APIRouter(prefix="/repository")
     "", description="get info about repositories "
 )
 async def get_advertisements(
-    request: Union[List[str], None] = Query(default=None), session=None
+    request: Union[List[str], None] = Query(default=None)
 ):
     repository_info_service = RepositoryInfoService()
 

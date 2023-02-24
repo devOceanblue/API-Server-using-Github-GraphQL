@@ -15,6 +15,6 @@ async def test_get_advertisements(client):
     params = {
         "request": ['a','b','c']
     }
-    resp = client.get(url='http://localhost:8082/repository', params=params)
+    resp = client.get(url='http://localhost:8080/repository', params=params)
     result = resp.json()
     pprint.pprint(result)
