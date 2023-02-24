@@ -34,6 +34,6 @@ you can test
 saved environment variable in dockerfile and application code get the environment variable from config.py 
 
 ### 2. GraphQL usages
-  - used GraphQL to fetch data from Github GraphQL API
+  - used GraphQL to fetch data from github graphQL API
 ### 3. Possible improvements
-  - GraphQL Exception Handling seems a bit tricky. there might be more exceptions. we need to catch and handle the exceptions more carefully.
+  - GraphQL exception handling seems a bit tricky. there might be more exceptions. we need to catch and handle the exceptions more carefully.
