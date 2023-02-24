@@ -1,9 +1,7 @@
-import logging
+from typing import Union, List
 
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Query
 
-from models.base_models.requests.repository import GetRepositoryRequest
-from models.base_models.responses.repository import GetReposiotryResponse
 from services.repository_info_service import RepositoryInfoService
 
 repository_router = APIRouter(prefix="/repository")
@@ -12,9 +10,9 @@ repository_router = APIRouter(prefix="/repository")
     "", description="get info about repositories "
 )
 async def get_advertisements(
-    request: GetRepositoryRequest = Depends(), session=None
+    request: Union[List[str], None] = Query(default=None), session=None
 ):
     repository_info_service = RepositoryInfoService()
-    logging.warning(f'helllllllooooooo {request.names}')
-    result = await repository_info_service.get_repositories_info([request.names])
+
+    result = await repository_info_service.get_repositories_info(request)
     return result

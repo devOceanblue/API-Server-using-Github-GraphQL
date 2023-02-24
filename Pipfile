@@ -7,6 +7,9 @@ name = "pypi"
 fastapi = "*"
 uvicorn = {extras = ["standard"], version = "*"}
 aiohttp = "==3.8.4"
+requests = "*"
+httpx = "*"
+pytest-env = "*"
 
 [dev-packages]
 fastapi = "*"
@@ -15,7 +18,8 @@ pytest = "*"
 pytest-env = "*"
 pytest-asyncio = "*"
 pytest-xdist = "*"
-
+anyio = "*"
+httpx = "*"
 
 [requires]
 python_version = "3.11"
