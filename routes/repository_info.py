@@ -7,7 +7,7 @@ from services.repository_info_service import RepositoryInfoService
 repository_router = APIRouter(prefix="/repository")
 
 @repository_router.get(
-    "", description="get info about repositories "
+    "", description="get info about github repositories "
 )
 async def get_advertisements(
     request: Union[List[str], None] = Query(default=None)

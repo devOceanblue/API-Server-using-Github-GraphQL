@@ -8,44 +8,62 @@ from fastapi import HTTPException
 import config
 
 
-def get_graphql_query_with_name(name: str):
-    graphql_query = f"""
-    query {{
-      search(
-        query: "name:airbnb",
-        type:REPOSITORY, 
-        first: 100
-      ) {{
-        repos: edges {{
-          repo: node {{
-            ... on Repository {{
-              name
-              description
-              openIssues: issues(states:OPEN) {{
-                totalCount
-              }}
-              fiveMostRecentIssues: issues(first:5, orderBy: {{field: CREATED_AT, direction: DESC}}){{
-                  edges {{
-                      node {{
-                          title
+
+class RepositoryInfoService:
+    def _parse_data(self, results) -> List[Dict]:
+        """parse result of github GraphQL API.
+
+        Parameters:
+        name (List): result of github GraphQL API
+
+        Returns:
+        List[Dict]: parsed result.
+       """
+
+        return [r['data']['search'] for r in results]
+
+    def _get_graphql_query_with_name(self, name: str) -> str:
+        """insert parameter(name) into graphql query.
+
+        Parameters:
+        name (str): name of github repository to search
+
+        Returns:
+        str: complete graphql query with inserted arguments.
+       """
+        graphql_query = f"""
+        query {{
+          search(
+            query: "name:airbnb",
+            type:REPOSITORY, 
+            first: 100
+          ) {{
+            repos: edges {{
+              repo: node {{
+                ... on Repository {{
+                  name
+                  description
+                  openIssues: issues(states:OPEN) {{
+                    totalCount
+                  }}
+                  fiveMostRecentIssues: issues(first:5, orderBy: {{field: CREATED_AT, direction: DESC}}){{
+                      edges {{
+                          node {{
+                              title
+                          }}
                       }}
                   }}
+                }}
               }}
             }}
           }}
         }}
-      }}
-    }}
-    """
-    return graphql_query
-
-class RepositoryInfoService:
-    def _parse_data(self, results):
-        return [r['data']['search'] for r in results]
+        """
+        return graphql_query
 
 
     async def get_repository_info(self, session: object, headers: Dict, name: str):
-        query = get_graphql_query_with_name(name)
+        query = self._get_graphql_query_with_name(name)
         async with session.post("https://api.github.com/graphql", json={'query': query}, headers=headers) as response:
             res = await response.json()
             if res.get('errors'):
