@@ -33,8 +33,3 @@ async def on_start_up():
 @app.on_event("shutdown")
 async def on_start_up():
     logger.info("on_shutdown")
-
-
-@app.get("/hello/{name}")
-async def say_hello(name: str):
-    return {"message": f"Hello {name}"}
